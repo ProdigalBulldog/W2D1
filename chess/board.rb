@@ -1,14 +1,13 @@
 require 'byebug'
-
-require_relative 'piece'
+require_relative 'null_piece'
 
 class Board
-  STARTING_BOARD = {
-    [0, 0] => "rook", [0, 1] => "knight", [0, 2] => "bishop", [0, 3] => "queen", [0, 4] => "king", [0, 5] => "bishop", [0, 6] => "knight", [0, 7] => "rook",
-    [1, 0] => "pawn", [1, 1] => "pawn", [1, 2] => "pawn", [1, 3] => "pawn", [1, 4] => "pawn", [1, 5] => "pawn", [1, 6] => "pawn", [1, 7] => "pawn",
-    [6, 0] => "pawn", [6, 1] => "pawn", [6, 2] => "pawn", [6, 3] => "pawn", [6, 4] => "pawn", [6, 5] => "pawn", [6, 6] => "pawn", [6, 7] => "pawn",
-    [7, 0] => "rook", [7, 1] => "knight", [7, 2] => "bishop", [7, 3] => "queen", [7, 4] => "king", [7, 5] => "bishop", [7, 6] => "knight", [7, 7] => "rook"
-  }
+  # STARTING_BOARD = {
+  #   [0, 0] => "rook", [0, 1] => "night", [0, 2] => "bishop", [0, 3] => "queen", [0, 4] => "king", [0, 5] => "bishop", [0, 6] => "night", [0, 7] => "rook",
+  #   [1, 0] => "pawn", [1, 1] => "pawn", [1, 2] => "pawn", [1, 3] => "pawn", [1, 4] => "pawn", [1, 5] => "pawn", [1, 6] => "pawn", [1, 7] => "pawn",
+  #   [6, 0] => "pawn", [6, 1] => "pawn", [6, 2] => "pawn", [6, 3] => "pawn", [6, 4] => "pawn", [6, 5] => "pawn", [6, 6] => "pawn", [6, 7] => "pawn",
+  #   [7, 0] => "rook", [7, 1] => "night", [7, 2] => "bishop", [7, 3] => "queen", [7, 4] => "king", [7, 5] => "bishop", [7, 6] => "night", [7, 7] => "rook"
+  # }
   
   attr_reader :grid
   
@@ -16,11 +15,12 @@ class Board
   
   def initialize
     # debugger
-    @grid = Array.new(8) {Array.new(8)}
-    STARTING_BOARD.each do |pos, piece|
-      # x, y = pos
-      self[pos] = Piece.new(piece)
-    end
+    @grid = Array.new(8) {Array.new(8){NullPiece.instance}}
+    # STARTING_BOARD.each do |pos, piece|
+    #   color_arg = :black if pos[0] <= 1
+    #   color_arg = :light_white if pos[0] >= 6
+    #   self[pos] = Piece.new(piece, color_arg)
+    # end
     nil
   end
   
